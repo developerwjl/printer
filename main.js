@@ -1,9 +1,21 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow,ipcMain} = require('electron')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
+
+
+
+ipcMain.on('asynchronous-toGetPringList', (event, arg) => {
+
+  //发送给UI线程 系统打印机列表
+  const printers = mainWindow.webContents.getPrinters();
+  //传递给页面本地服务器接受到的值 view
+  event.sender.send('asynchronous-Print',  printers);
+
+});
+
 
 function createWindow () {
   // Create the browser window.

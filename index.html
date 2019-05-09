@@ -11,9 +11,32 @@
     Chromium <script>document.write(process.versions.chrome)</script>,
     and Electron <script>document.write(process.versions.electron)</script>.
 
+    <button onclick="buttonClick()">获取打印机列表</button>
+
     <script>
       // You can also require other files to run in this process
-      require('./renderer.js')
+      // require('./renderer.js')
+
+      const { ipcRenderer } = require('electron');
+
+      ipcRenderer.on('asynchronous-Print', (e, msg) => {
+        // 监听主进程发来的事件...
+
+        console.log(msg);
+
+      })
+
+
+
+      function buttonClick() {
+        console.log("hahhahaha");
+
+        ipcRenderer.send('asynchronous-toGetPringList', "主线程去获取打印列表");
+
+      }
+
+
+
     </script>
   </body>
 </html>
