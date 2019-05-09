@@ -13,6 +13,9 @@
 
     <button onclick="buttonClick()">获取打印机列表</button>
 
+    <p id="p1">Hello World!</p>
+
+
     <script>
       // You can also require other files to run in this process
       // require('./renderer.js')
@@ -23,6 +26,8 @@
         // 监听主进程发来的事件...
 
         console.log(msg);
+
+        document.getElementById("p1").innerHTML=JSON.stringify(msg);
 
       })
 
